@@ -15,6 +15,7 @@ def add_todo():
     todos.append(todo)
     return redirect('/')
 
+
 @app.route('/delete/<int:index>')
 def delete_todo(index):
     del todos[index]
