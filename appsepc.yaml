@@ -1,12 +1,24 @@
 version: 0.0
 os: linux
-
+files:
+  - source: /todo-app
+    destination: /todo-app
 hooks:
-  ApplicationStop:
-    - location: stop_container.sh
+  BeforeInstall:
+    - location: /install_dependencies.sh
       timeout: 300
       runas: root
   AfterInstall:
-    - location: start_container.sh
+    - location: /change_permissions.sh
       timeout: 300
       runas: root
+  ApplicationStart:
+    - location: /start_server.sh
+   # - location: /todo-app/scripts/create_test_db.sh
+      timeout: 300
+      runas: root
+  ApplicationStop:
+    - location: /stop_server.sh
+      timeout: 300
+      runas: root
+
